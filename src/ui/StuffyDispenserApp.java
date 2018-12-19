@@ -4,22 +4,16 @@ import business.Stuffy;
 import db.StuffyDB;
 import util.Console;
 
-import java.util.ArrayList;
-
 public class StuffyDispenserApp {
 
 	public static void main(String[] args) {
+		StuffyDB stuffyDB = new StuffyDB();
+		stuffyDB.populateStuffies();
 
 		Console.displayLine("Welcome to the Stuffy Dispenser Application!\n");
-
-		ArrayList<Stuffy> stuffies = new ArrayList<>();
-
-
-
 		int option;
 
 		do {
-
 			Console.displayLine("\nMenu");
 			Console.displayLine("1 - Grab Stuffy");
 			Console.displayLine("2 - Add Stuffy");
@@ -30,19 +24,19 @@ public class StuffyDispenserApp {
 			switch (option) {
 				case 1:
 					// Grab stuffy
-					int stuffyID = (int)(Math.random() * )
-
+					// need to change method to get random id, rather than index
+					int listSize = stuffyDB.getStuffyListSize();
+					int stuffyID = (int)(Math.random() * listSize);
+					stuffyDB.grabStuffy(stuffyID);
 					break;
 				case 2:
 					// Add Stuffy
-
 					Console.displayLine("New Stuffy...");
-					Console.getString("Type?    ");
-					Console.getString("Size?    ");
-					Console.getString("Color?   ");
-
-
-
+					String type = Console.getString("Type?    ");
+					String size = Console.getString("Size?    ");
+					String color = Console.getString("Color?   ");
+					Stuffy stuffy = new Stuffy(stuffyDB.getLastID(), type, size, color);
+					stuffyDB.addStuffy(stuffy);
 					break;
 				case 3:
 					break;
