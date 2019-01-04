@@ -22,11 +22,16 @@ public class StuffyDB {
         stuffies.add(new Stuffy(10, "Tiger", "Small", "Green"));
     }
 
-    public void grabStuffy(int i) {
-        // need to change method to get id as parameter, and remove item with that id, not index
-        Stuffy grabbedStuffy = stuffies.remove(i);
+    public void grabStuffy(int id) {
+    	int grabbedStuffyIndex = -1;
+    	for (Stuffy s : stuffies) {
+    		if (id == s.getId()) {
+    			grabbedStuffyIndex = stuffies.indexOf(s);
+			}
+    	}
+    	Stuffy grabbedStuffy = stuffies.remove(grabbedStuffyIndex);
         Console.displayLine("Woo hoo! You got a " + grabbedStuffy.getColor() + ", " + grabbedStuffy.getSize()
-                + " " + grabbedStuffy.getType() + "!");
+        + " " + grabbedStuffy.getType() + "!");
     }
 
     public void addStuffy(Stuffy s) {
@@ -36,13 +41,6 @@ public class StuffyDB {
 
     public int getStuffyListSize() {
         return stuffies.size();
-    }
-
-    public int getLastID() {
-        int lastIndex = stuffies.size() - 1;
-        Stuffy lastStuffy = stuffies.get(lastIndex);
-        int lastID = lastStuffy.getId();
-        return lastID;
     }
 
 }
